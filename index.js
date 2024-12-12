@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.querySelector("#rota-table tbody");
 
     // URL to fetch the rota.json file from your public GitHub repository
-    const rotaUrl = "https://raw.githubusercontent.com/elo613/PublicRadRota/main/rota.json";
+    https://raw.githubusercontent.com/your-username/TestRota/main/rota.json
+
 
     // Variable to store all the rota data
     let rotaData = [];
