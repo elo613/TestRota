@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const today = new Date();
             rotaData = rotaData.filter(record => {
                 const recordDate = parseDate(record.Date); // Convert custom date format
+                console.log(`Record Date: ${record.Date} - Parsed Date: ${recordDate}`);  // Log the date parsing
                 return recordDate >= today; // Only future or today's dates
             });
 
