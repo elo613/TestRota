@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.querySelector("#rota-table tbody");
 
-    // URL to fetch the rota.json file from your public GitHub repository
-    https://raw.githubusercontent.com/elo613/TestRota/main/rota.json
-
+    // Dynamically get the URL of the script file and form the URL for rota.json
+    const scriptUrl = document.currentScript.src;  // Get the current script URL
+    const repoBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/"));  // Remove the script name to get the base URL
+    const rotaUrl = `${repoBaseUrl}/rota.json`;  // Append rota.json to the base URL
 
     // Variable to store all the rota data
     let rotaData = [];
