@@ -9,6 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 0;
     const rowsPerPage = 14;
 
+    // Function to convert the custom date format to a JavaScript Date object
+    function parseDate(dateStr) {
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const [day, month, year] = dateStr.split(' ');
+        const monthIndex = months.indexOf(month);
+        return new Date(`${year}-${monthIndex + 1}-${day}`);
+    }
+
     // Fetch the rota data from GitHub
     async function loadRotaData() {
         try {
@@ -18,12 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             rotaData = await response.json();
+
+            // Debug: Log the fetched data to ensure it's coming through correctly
+            console.log("Fetched Rota Data:", rotaData);
+
             // Filter out dates older than today
             const today = new Date();
             rotaData = rotaData.filter(record => {
-                const recordDate = new Date(record.Date);
+                const recordDate = parseDate(record.Date); // Convert custom date format
                 return recordDate >= today; // Only future or today's dates
             });
+
+            // Debug: Log the filtered data
+            console.log("Filtered Rota Data (Future or Today):", rotaData);
 
             // Display the first set of rows
             displayTableData();
@@ -37,10 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clear the existing table rows
         tableBody.innerHTML = "";
 
-        // Get the rows for the current page
+        // Debug: Check the current page data
         const startIndex = currentPage * rowsPerPage;
         const endIndex = startIndex + rowsPerPage;
         const currentPageData = rotaData.slice(startIndex, endIndex);
+        console.log("Displaying Rows:", currentPageData);
 
         // Populate the table rows
         currentPageData.forEach(record => {
